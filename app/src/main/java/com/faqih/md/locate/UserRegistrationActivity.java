@@ -172,9 +172,9 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
             cancel = true;
         }
 
-        if (!Validations.isPasswordMatch(password, confirmPassword)) {
-            editTextPassword.setError(getString(R.string.error_password_not_match));
-            focusView = editTextPassword;
+        if (!Validations.isPasswordMatch(password, confirmPassword)&&!TextUtils.isEmpty(confirmPassword)) {
+            editTextConfirmPassword.setError(getString(R.string.error_password_not_match));
+            focusView = editTextConfirmPassword;
             cancel = true;
         }
 

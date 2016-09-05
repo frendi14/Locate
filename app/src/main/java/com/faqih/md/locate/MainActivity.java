@@ -1,39 +1,56 @@
 package com.faqih.md.locate;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.view.KeyEvent;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.faqih.md.locate.fragments.HomeFragment;
-import com.faqih.md.locate.fragments.MapFragment;
-import com.faqih.md.locate.fragments.MemberFragment;
-import com.faqih.md.locate.init.Constants;
 
-public class MainActivity extends BaseActivity {
-//    private String groupId;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private MenuItem homeMenuItem;
-    private MenuItem menuItem;
+
+
+    Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
+    private int[] tabIcons = {
+            R.drawable.ic_home,
+            R.drawable.ic_group,
+            R.drawable.ic_chat
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        groupId = getIntent().getExtras().getString(Constants.groupId);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setupToolbar();
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        setupTabIcons();
 
         navigationView = (NavigationView) findViewById(R.id.navigation);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -62,50 +79,45 @@ public class MainActivity extends BaseActivity {
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-        Fragment fragment = null;
-        boolean isExit = false;
-        MainActivity.this.menuItem = menuItem;
         switch (menuItem.getItemId()) {
             case R.id.menu_home:
-                homeMenuItem = menuItem;
-                fragment = HomeFragment.newInstance();
                 break;
             case R.id.menu_member:
-//                fragment = MemberFragment.newInstance(groupId);
                 break;
             case R.id.menu_maps:
-//                fragment = MapFragment.newInstance(groupId);
                 break;
             case R.id.menu_exit:
-                dialog_logout();
-                isExit = true;
+                exit();
                 break;
             default:
-                fragment = HomeFragment.newInstance();
                 break;
         }
-        if (!isExit){
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        menuItem.setChecked(true);
 
-            menuItem.setChecked(true);
+        getToolbar().setTitle(menuItem.getTitle());
+        drawerLayout.closeDrawers();
+    }
 
-            getToolbar().setTitle(menuItem.getTitle());
-            drawerLayout.closeDrawers();
-        }
+    private void exit(){
+        startActivity(new Intent(this, SignInActivity.class));
+        overridePendingTransition(R.anim.activity_animation_back_left_in, R.anim.activity_animation_back_rigt_out);
+        this.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         actionBarDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
@@ -114,42 +126,57 @@ public class MainActivity extends BaseActivity {
         return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (menuItem.getItemId()== homeMenuItem.getItemId()){
-            dialog_logout();
-        } else {
-            menuItem = homeMenuItem;
-            Fragment fragment = HomeFragment.newInstance();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
-            homeMenuItem.setChecked(true);
-
-            getToolbar().setTitle(homeMenuItem.getTitle());
+    protected void setupToolbar() {
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            if(getSupportActionBar()!=null){
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+            }
         }
-        return true;
     }
 
-    private void dialog_logout(){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setTitle("Logout");
-        dialogBuilder.setMessage("Are you sure?");
-        dialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                finish();
-            }
-        });
-        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        Dialog dialog = dialogBuilder.create();
-        dialog.show();
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new HomeFragment());
+        adapter.addFragment(new HomeFragment());
+        adapter.addFragment(new HomeFragment());
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment) {
+            mFragmentList.add(fragment);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return null;
+        }
     }
 }

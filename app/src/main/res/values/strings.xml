@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">Locate</string>
+    <string name="logo_message">Where are your members?</string>
+
+    <string name="input_type_text_no_space_and_special_character">1,2,3,4,5,6,7,8,9,0,_,qwertyuiopasdfghjklzxcvbnm</string>
+    <string name="timestamp">dd-MM-yyyy HH:mm:ss</string>
+
+    <!--Constants-->
+    <string name="groups">groups</string>
+    <string name="users">users</string>
+    <string name="locations">locations</string>
+    <string name="groupId">groupId</string>
+    <string name="userId">userId</string>
+    <string name="invitations">invitations</string>
+    <!--<string name="key">key</string>-->
+    <string name="name">name</string>
+    <string name="password">password</string>
+    <string name="roleId">roleId</string>
+    <string name="admin">administrator</string>
+    <string name="member">member</string>
+    <string name="uid">uid</string>
+    <string name="expired">expired</string>
+    <string name="limit">limit</string>
+    <string name="status">status</string>
+    <string name="qr">qr</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
+    <string name="time">time</string>
+    <string name="updates">updates</string>
+
+    <string name="defaultStatus">requested</string>
+    <string name="defaultStatusAdmin">approved</string>
+    <string name="defaultUpdates">Hello World!</string>
+
+    <!--Activity Login-->
+    <string name="prompt_userId">User id</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_message_user_sign_up">Create account</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="error_userId_not_exist">User id not exist</string>
+    <string name="error_userId_exist">User id already exist</string>
+    <string name="error_password_login_failed">Invalid password</string>
+
+    <!--Activity Sign Up Menu-->
+    <string name="action_group_sign_up">Create group</string>
+    <string name="action_join_group">Join group</string>
+    <string name="prompt_message_sign_up_header">The easiest way to locate your members</string>
+    <string name="prompt_message_sign_up_footer_1">Create your group</string>
+    <string name="prompt_message_sign_up_footer_2">Invite your member</string>
+    <string name="prompt_message_sign_up_footer_3">Locate where they are</string>
+
+    <!--Activity Group Registration-->
+    <string name="prompt_groupId">Group id</string>
+    <string name="prompt_groupName">Group name</string>
+    <string name="action_create_admin">Create admin</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_groupId_exist">Group id already exist</string>
+
+    <!--Activity User Registration-->
+    <string name="prompt_user_name">User name</string>
+    <string name="prompt_confirm_password">Confirm password</string>
+    <string name="action_register">Register</string>
+    <string name="error_user_id_exist">User id is exist</string>
+    <string name="error_password_not_match">Password not match</string>
+    <string name="error_password_less">password should be at least 8 characters</string>
+
+    <!-- String member registration-->
+
+    <string name="error_group_id_on_member_registration_not_exist_">Group id is not exist. For register a group back to login form and press sign up.</string>
+
+
+    <string name="title_activity_group_invitation">Group Invitation</string>
+    <string name="title_activity_admin_main">AdminMainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="navigation_drawer_title">Administrator Menu</string>
+    <string name="navigation_drawer_menu_locate">Locate</string>
+    <string name="navigation_drawer_menu_logout">Logout</string>
+    <string name="title_activity_locate">Locate</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_member">Member</string>
+    <string name="menu_maps">Maps</string>
+    <string name="menu_exit">Exit</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="image_description">image description</string>
+
+    <string name="constant_users">users</string>
+    <string name="constant_serverKey">key=AIzaSyAtPJtwkLUCh_0tr5dWzHI2y0TDboexfbk</string>
+</resources>

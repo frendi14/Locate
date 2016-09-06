@@ -5,4 +5,11 @@
     android:background="@color/white">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_home_QR_imageView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_description"/>
 </RelativeLayout>

@@ -18,6 +18,9 @@ public class SignUpMenuActivity extends AppCompatActivity implements View.OnClic
 
         Button buttonCreateGroup = (Button)findViewById(R.id.sign_up_menu_group_reg_button);
         buttonCreateGroup.setOnClickListener(this);
+
+        Button butonInvites = (Button)findViewById(R.id.sign_up_menu_member_reg_button);
+        butonInvites.setOnClickListener(this);
     }
 
     @Override
@@ -25,6 +28,8 @@ public class SignUpMenuActivity extends AppCompatActivity implements View.OnClic
         if(v.getId()==R.id.sign_up_menu_group_reg_button){
             startActivity(new Intent(this, GroupRegistrationActivity.class));
             overridePendingTransition(R.anim.activity_animation_right_in, R.anim.activity_animation_left_out);
+        } else if (v.getId()==R.id.sign_up_menu_member_reg_button){
+            startActivity(new Intent(this, InvitationScanActivity.class));
         }
     }
 

@@ -24,6 +24,7 @@ import com.faqih.md.locate.init.Constants;
 import com.faqih.md.locate.init.Validations;
 import com.faqih.md.locate.util.MD5;
 import com.faqih.md.locate.util.QRCode;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;

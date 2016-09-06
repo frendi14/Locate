@@ -39,6 +39,7 @@ dependencies {
 
     compile 'com.google.android.gms:play-services-maps:9.4.0'
     compile 'com.google.android.gms:play-services-location:9.4.0'
+    compile 'com.google.android.gms:play-services-vision:9.4.0'
 
     compile 'com.google.zxing:core:3.2.1'
 }

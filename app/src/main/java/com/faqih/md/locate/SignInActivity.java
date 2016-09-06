@@ -51,6 +51,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private ProgressDialog dialog;
 
+    String userId;
     private String password;
 
     private DatabaseReference databaseReference;
@@ -92,7 +93,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editTextUserId.setError(null);
         editTextPassword.setError(null);
 
-        String userId = editTextUserId.getText().toString();
+        userId = editTextUserId.getText().toString();
         password = editTextPassword.getText().toString();
 
         boolean cancel = false;
@@ -142,7 +143,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 editTextPassword.requestFocus();
             } else {
                 dialog.dismiss();
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MainActivity.class).putExtra(getString(R.string.userId),userId));
                 overridePendingTransition(R.anim.activity_animation_right_in, R.anim.activity_animation_left_out);
                 finish();
             }

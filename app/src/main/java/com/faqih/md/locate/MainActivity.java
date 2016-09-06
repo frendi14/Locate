@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
-
     Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -37,10 +36,14 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_chat
     };
 
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        userId = getIntent().getExtras().getString(getString(R.string.userId));
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setupToolbar();
@@ -147,9 +150,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new HomeFragment());
+        adapter.addFragment(new HomeFragment().newInstance(this, userId));
+        adapter.addFragment(new HomeFragment().newInstance(this, userId));
+        adapter.addFragment(new HomeFragment().newInstance(this, userId));
         viewPager.setAdapter(adapter);
     }
 

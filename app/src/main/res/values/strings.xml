@@ -4,6 +4,7 @@
 
     <string name="input_type_text_no_space_and_special_character">1,2,3,4,5,6,7,8,9,0,_,qwertyuiopasdfghjklzxcvbnm</string>
     <string name="timestamp">dd-MM-yyyy HH:mm:ss</string>
+    <string name="QR_generate_file_path">/sdcard/invitation.png</string>
 
     <!--Constants-->
     <string name="groups">groups</string>
@@ -12,7 +13,6 @@
     <string name="groupId">groupId</string>
     <string name="userId">userId</string>
     <string name="invitations">invitations</string>
-    <!--<string name="key">key</string>-->
     <string name="name">name</string>
     <string name="password">password</string>
     <string name="roleId">roleId</string>
@@ -21,6 +21,7 @@
     <string name="uid">uid</string>
     <string name="expired">expired</string>
     <string name="limit">limit</string>
+    <string name="count">count</string>
     <string name="status">status</string>
     <string name="qr">qr</string>
     <string name="latitude">latitude</string>
@@ -31,6 +32,15 @@
     <string name="defaultStatus">requested</string>
     <string name="defaultStatusAdmin">approved</string>
     <string name="defaultUpdates">Hello World!</string>
+
+    <!--Permissions-->
+    <string name="camera_permission_code">REQUEST_CAMERA</string>
+    <string name="prompt_message_dialog_camera_permission">You need to allow access to camera</string>
+    <string name="prompt_message_camera_permission_denied">Camera permission denied</string>
+
+    <!--Dialog Permission Button-->
+    <string name="action_ok">Ok</string>
+    <string name="action_cancel">Cancel</string>
 
     <!--Activity Login-->
     <string name="prompt_userId">User id</string>
@@ -64,12 +74,14 @@
     <string name="error_password_not_match">Password not match</string>
     <string name="error_password_less">password should be at least 8 characters</string>
 
-    <!-- String member registration-->
+    <!--Activity Invitation Scan-->
+    <string name="prompt_message_invitation_scan">Scan QRCode Invitation</string>
+    <string name="action_browse_files">Browse Files</string>
 
-    <string name="error_group_id_on_member_registration_not_exist_">Group id is not exist. For register a group back to login form and press sign up.</string>
+    <!--<string name="error_group_id_on_member_registration_not_exist_">Group id is not exist. For register a group back to login form and press sign up.</string>-->
 
 
-    <string name="title_activity_group_invitation">Group Invitation</string>
+    <!--<string name="title_activity_group_invitation">Group Invitation</string>-->
     <string name="title_activity_admin_main">AdminMainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

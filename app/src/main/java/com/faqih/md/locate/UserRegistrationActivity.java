@@ -68,12 +68,13 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
     private ProgressDialog dialog;
 
     private DatabaseReference databaseReference;
-
+    private String account;
     private String groupId;
     private String groupName;
     private String userId;
     private String userName;
     private String password;
+    private Integer count;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -86,8 +87,14 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
 
         if(getIntent().getExtras()!=null){
             String[] groups = getIntent().getExtras().getStringArray(getString(R.string.groups));
-            groupId = groups[0];
-            groupName = groups[1];
+            account = groups[0];
+            if (getString(R.string.admin).equals(account)){
+                groupId = groups[1];
+                groupName = groups[2];
+            } else {
+                groupId = groups[1];
+                count = Integer.parseInt(groups[2]);
+            }
         } else {
             finish();
         }
@@ -204,22 +211,6 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         if (!dataSnapshot.exists()){
-            DatabaseReference referenceInvitations = databaseReference.child(getString(R.string.invitations)).push();
-
-            Map<String, Object> map = new HashMap<>();
-            map.put(getString(R.string.groupId), groupId);
-
-            referenceInvitations.setValue(map);
-            String invitationCode = referenceInvitations.getKey();
-
-            String code = null;
-            try {
-                Bitmap bmp = QRCode.getQRCode(invitationCode);
-                code = com.faqih.md.locate.util.Base64.base64fromBitmap(bmp);
-            } catch (WriterException e) {
-                e.printStackTrace();
-            }
-
             String uid = FirebaseInstanceId.getInstance().getToken();
 
             String encryptedPassword = null;
@@ -234,9 +225,25 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
             userMap.put(getString(R.string.groupId), groupId);
             userMap.put(getString(R.string.password), encryptedPassword);
             userMap.put(getString(R.string.uid), uid);
+            userMap.put(getString(R.string.roleId), account);
 
-            if (!TextUtils.isEmpty(groupName)){
-                userMap.put(getString(R.string.roleId), getString(R.string.admin));
+            if (getString(R.string.admin).equals(account)){
+                DatabaseReference referenceInvitations = databaseReference.child(getString(R.string.invitations)).push();
+
+                Map<String, Object> map = new HashMap<>();
+                map.put(getString(R.string.groupId), groupId);
+
+                referenceInvitations.setValue(map);
+                String invitationCode = referenceInvitations.getKey();
+
+                String code = null;
+                try {
+                    Bitmap bmp = QRCode.getQRCode(invitationCode);
+                    code = com.faqih.md.locate.util.Base64.base64fromBitmap(bmp);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+
                 userMap.put(getString(R.string.status), getString(R.string.defaultStatusAdmin));
 
                 Map<String, Object> adminMap = new HashMap<>();
@@ -255,13 +262,15 @@ public class UserRegistrationActivity extends AppCompatActivity implements View.
 
                 groupMap.put(getString(R.string.expired), expiredString);
                 groupMap.put(getString(R.string.limit), Constants.defaultLimitGroup);
+                groupMap.put(getString(R.string.count), Constants.defaultCount);
                 groupMap.put(getString(R.string.qr), code);
                 groupMap.put(getString(R.string.status), getString(R.string.defaultStatus));
 
                 databaseReference.child(getString(R.string.groups)).child(groupId).setValue(groupMap);
             } else {
                 userMap.put(getString(R.string.status), getString(R.string.defaultStatus));
-                userMap.put(getString(R.string.roleId), getString(R.string.member));
+
+                databaseReference.child(getString(R.string.groups)).child(groupId).child(getString(R.string.count)).setValue(count+1);
 
                 FirebaseMessaging.getInstance().subscribeToTopic(groupId);
             }

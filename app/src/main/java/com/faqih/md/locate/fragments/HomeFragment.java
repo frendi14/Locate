@@ -13,9 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.faqih.md.locate.R;
-import com.faqih.md.locate.init.Constants;
-import com.faqih.md.locate.util.Base64;
-import com.faqih.md.locate.util.QRCode;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;

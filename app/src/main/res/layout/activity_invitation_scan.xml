@@ -16,19 +16,11 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="browse files"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan QRcode"
-        android:id="@+id/textView"
+        android:text="@string/prompt_message_invitation_scan"
+        android:id="@+id/invitation_scan_messange_textView"
         android:layout_below="@+id/invitation_scan_surface_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/text_top_margin"
@@ -61,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/app_name"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,14 +62,5 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="or"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:textStyle="bold" />
 
 </RelativeLayout>

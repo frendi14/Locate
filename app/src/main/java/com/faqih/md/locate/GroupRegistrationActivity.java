@@ -105,7 +105,7 @@ public class GroupRegistrationActivity extends AppCompatActivity implements View
     public void onDataChange(DataSnapshot dataSnapshot) {
         dialog.dismiss();
         if (!dataSnapshot.exists()){
-            String[] groups = new String[]{groupId, groupName};
+            String[] groups = new String[]{getString(R.string.admin), groupId, groupName};
             startActivity(new Intent(this, UserRegistrationActivity.class).putExtra(getString(R.string.groups), groups));
             overridePendingTransition(R.anim.activity_animation_right_in, R.anim.activity_animation_left_out);
         } else {

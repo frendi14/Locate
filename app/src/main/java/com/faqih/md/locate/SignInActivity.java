@@ -143,7 +143,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 editTextPassword.requestFocus();
             } else {
                 dialog.dismiss();
-                startActivity(new Intent(this, MainActivity.class).putExtra(getString(R.string.userId),userId));
+                startActivity(new Intent(this, MainActivity.class).putExtra(getString(R.string.userId), userId));
                 overridePendingTransition(R.anim.activity_animation_right_in, R.anim.activity_animation_left_out);
                 finish();
             }

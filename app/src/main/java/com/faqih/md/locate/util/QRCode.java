@@ -8,11 +8,17 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 /**
  * Created by Faqih on 9/4/2016.
  */
 public class QRCode {
-    private static int bitmapSize = 150;
+    private static int bitmapSize = 200;
 
     public static Bitmap getQRCode (String contain) throws WriterException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -24,5 +30,17 @@ public class QRCode {
                 }
             }
         return bmp;
+    }
+
+    public static void saveQRtoPNG(String filePath, Bitmap bitmap) throws IOException {
+        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, arrayOutputStream);
+
+        FileOutputStream outputStream = new FileOutputStream(filePath);
+        arrayOutputStream.writeTo(outputStream);
+        arrayOutputStream.flush();
+        arrayOutputStream.flush();
+        arrayOutputStream.close();
+        outputStream.close();
     }
 }
